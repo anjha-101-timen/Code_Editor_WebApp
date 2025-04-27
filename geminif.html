@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Example</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        #user-input {
+            width: 80%;
+            padding: 5px;
+        }
+        #send-button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container"></div>
+    <input type="text" id="user-input">
+    <button id="send-button">Send</button>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        const API_KEY = 'AIzaSyDSl5b8lA1qn1-IzPy8SLR7OOZLQF46XCc'; // Replace with your actual Gemini API key
+        const MODEL_NAME = "gemini-pro";
+
+        sendButton.addEventListener('click', async () => {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+                appendMessage('user', userMessage);
+                userInput.value = '';
+                await getGeminiResponse(userMessage);
+            }
+        });
+
+        userInput.addEventListener('keydown', async (event) => {
+          if (event.key === 'Enter') {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+              appendMessage('user', userMessage);
+              userInput.value = '';
+              await getGeminiResponse(userMessage);
+            }
+          }
+        });
+
+        async function getGeminiResponse(message) {
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: message }],
+                        }],
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const geminiMessage = data.candidates[0].content.parts[0].text;
+                appendMessage('gemini', geminiMessage);
+
+            } catch (error) {
+                console.error('Error fetching Gemini API:', error);
+                appendMessage('gemini', 'Error: Unable to get response.');
+            }
+        }
+
+        function appendMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = `${sender}: ${message}`;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll
+        }
+    </script>
+</body>
+</html>
