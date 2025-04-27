@@ -1,0 +1,53 @@
+
+
+
+
+.horizontal-bar, .vertical-bar, .bottom-vertical-bar {
+    transition: none;
+    animation: rainbow 5s linear infinite;
+}
+
+.horizontal-bar {
+    height: 5px;
+    cursor: row-resize;
+}
+
+.vertical-bar {
+    width: 5px;
+    cursor: col-resize;
+}
+
+.bottom-vertical-bar {
+    height: 5px;
+    cursor: row-resize;
+}
+
+
+.new-horizontal-bar {
+    height: 10px; /* Adjust height as needed */
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Rainbow gradient */
+    cursor: row-resize; /* Set cursor for resizing */
+    position: relative; /* Make it a positioning context */
+}
+
+.new-horizontal-bar-vertical {
+    width: 10px; /* Adjust width as needed */
+    height: 100%; /* Make it fill the horizontal bar's height */
+    background: linear-gradient(to bottom, red, orange, yellow, green, blue, indigo, violet); /* Rainbow gradient */
+    position: absolute; /* Position it relative to the horizontal bar */
+    right: 0; /* Position it at the right edge */
+    cursor: col-resize; /* Set cursor for resizing */
+}
+
+.right-vertical-bar {
+    width: 10px;
+    background: linear-gradient(to bottom, red, orange, yellow, green, blue, indigo, violet);
+    height: 100vh; /* Make it fill the entire viewport height */
+    position: fixed; /* Fix it to the right side */
+    top: 0;
+    right: 0;
+    cursor: col-resize;
+    z-index: 100; /* Ensure it's above other elements */
+}
+
+
