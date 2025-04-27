@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor WebApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="additionalBar.css">
+    <link rel="stylesheet" href="shareCode.css">
+    <link rel="stylesheet" href="userChoiceText.css">
+    <link rel="stylesheet" href="refreshLoaders.css">
+    <link rel="stylesheet" href="customFormatInputOutput.css">
+    <link rel="stylesheet" href="tabContainer.css">
+    <link rel="stylesheet" href="labelShaperInputOutput.css">
+    <link rel="stylesheet" href="sliderHorizontalVertical.css">
+    <link rel="stylesheet" href="fileManagement.css">
+    <link rel="stylesheet" href="editorButtonSpace.css">
+    <link rel="stylesheet" href="grokModelSelection.css">
+    <link rel="stylesheet" href="horizontalRectangularBoxSquareButton.css">
+    <link rel="stylesheet" href="verticalRectangularBoxCircleButton.css">
+    <link rel="stylesheet" href="screenshot.css">
+    <link rel="stylesheet" href="additional-bar.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="top-bar">
+            <div class="top-buttons">
+                <button class="top-buttons" id="fileUploadBtn"><img src="file_upload.png" alt="Upload">Upload</button>
+                <button class="top-buttons" id="fileDownloadBtn"><img src="file_download.png" alt="Download">Download</button>
+                <button class="top-buttons" id="languageBtn"><img src="language.png" alt="Language">Language</button>
+                <button class="top-buttons" id="runBtn"><img src="run.png" alt="Run">Run</button>
+                <button class="top-buttons" id="stopBtn"><img src="stop.png" alt="Stop">Stop</button>
+                <button class="top-buttons" id="debugBtn"><img src="generate.png" alt="Generate">Theme</button>
+                <button class="top-buttons" id="pdfBtn"><img src="pdf.png" alt="PDF">P.D.F</button>
+                <button class="top-buttons" id="resultBtn"><img src="result.png" alt="Result">Screenshot</button>
+                <button class="top-buttons" id="shareBtn"><img src="share.png" alt="Share">Share</button>
+                <button class="top-buttons" id="grokAPIKeyBtn"><img src="web_dev.png" alt="Grok API Key">Grok API Key</button>
+            </div>
+        </div>
+
+        <div id="shareModal" class="modal">
+            <div class="modal-content">
+                <h2>Share Your Code</h2>
+                <div class="link-section">
+                    <!-- Light Mode -->
+                    <label for="shareLinkLight">Light Mode Link:</label>
+                    <input type="text" id="shareLinkLight" class="generated-link" readonly />
+                    <button class="copy-link-btn" id="copyLinkBtnLight">Copy Light Mode Link</button>
+        
+                    <!-- Dark Mode -->
+                    <label for="shareLinkDark">Dark Mode Link:</label>
+                    <input type="text" id="shareLinkDark" class="generated-link" readonly />
+                    <button class="copy-link-btn" id="copyLinkBtnDark">Copy Dark Mode Link</button>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- <div class="sider-bar">
+                <div class="sider-buttons">
+                    <button class="sider-button" id="screenshotBtn"></button>
+                    <button class="sider-button" id="themeChangeBtn"><img src="themes.png" alt="Change Themes"></button>
+                    <button class="sider-button" id="modeLightDarkBtn"></button>
+                    <button class="sider-button" id="changeOrientationBtn"></button>
+                    <button class="sider-button" id="hideMainEditorBtn"></button>
+                    <button class="sider-button" id="hideInputOutputBtn"></button>
+                    <button class="sider-button" id="hideEditorMainBtn"></button>
+                    <button class="sider-button" id="userChoiceScreenshotBtn"></button>
+                    <button class="sider-button" id="userChoiceTextBtn"></button>
+                    <button class="sider-button" id="colorImage"></button>
+                </div>
+                
+            </div> -->
+            <div class="editor-container">
+                <div class="editor-area">
+                    <div class="editor-label">
+                        <div class="editor-buttons">
+                            <div class="editors-label">Main.Code.Editor</div>
+                            <button class="editor-btn" id="editorCheckedBtn"><img src="checked.png" alt="Checked"></button>
+                            <button class="editor-button" id="editorTextUploadBtn"><img src="upload.png" alt="Upload"></button>
+                            <button class="editor-button" id="editorTextDownloadBtn"><img src="download.png" alt="Download"></button>
+                            <button class="editor-btn" id="editorPlusBtn"><img src="plus.png" alt="Plus"></button>
+                            <button class="editor-btn" id="editorColorBtn"><img src="color_wheel.png" alt="Color"></button>
+                            <button class="editor-btn" id="editorMinusBtn"><img src="minus.png" alt="Minus"></button>
+                            <button class="editor-button" id="editorTextImageBtn"><img src="screenshot.png" alt="Screenshot"></button>
+                            <button class="editor-button" id="editorExecuteAI"><img src="idea.png" alt="Idea"></button>
+                            <button class="editor-btn" id="editorFontBtn"><img src="text.png" alt="Font Text"></button>
+                            <button class="editor-btn" id="editorBackgroundBtn"><img src="background.png" alt="Background"></button>
+                            <button class="editor-button" id="editorPdfImageBtn"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="editor-btn" id="editorCancelBtn"><img src="canceled.png" alt="Canceled"></button>
+                        </div>
+                    </div>
+                    <div id="editor" style="height: calc(100% - 130px);"></div> <div class="additional-bar">
+                        <button class="additional-button" id="promptImageBtn"><img src="image.png" alt="Prompt Image"></button>
+                        <button class="additional-button" id="promptImageDisplayBtn"><img src="image.png" alt="Prompt Display Image"></button>
+                        <input type="text" class="additional-input" placeholder="Enter text here...">
+                        <button class="additional-button" id="leftPointerBtn"><img src="left_arrow.png" alt="Left Arrow"></button>
+                        <button class="additional-button" id="uploadPromptBtn"><img src="upload.png" alt="Upload"></button>
+                        <button class="additional-button" id="downloadPromptBtn"><img src="download.png" alt="Download"></button>
+                        <button class="additional-button" id="modelBtn"><img src="models.png" alt="Model"></button>
+                        <button class="additional-button" id="imagePointerBtn"><img src="screenshot.png" alt="Image Pointer"></button>
+                        <button class="additional-button" id="rightPointerBtn"><img src="right_arrow.png" alt="Right Arrow"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="vertical-bar"></div>
+            <div class="input-output-container">
+                <div class="input-area">
+                    <div class="input-label">
+                        Input
+                        <div class="input-buttons">
+                            <button class="input-btn" id="inputCheckedBtn"><img src="checked.png" alt="Checked"></button>
+                            <button class="input-button" id="inputTextUploadBtn"><img src="upload.png" alt="Upload"></button>
+                            <button class="input-button" id="inputTextDownloadBtn"><img src="download.png" alt="Download"></button>
+                            <button class="input-btn" id="inputPlusBtn"><img src="plus.png" alt="Plus"></button>
+                            <button class="input-btn" id="inputColorBtn"><img src="color_wheel.png" alt="Color"></button>
+                            <button class="input-btn" id="inputMinusBtn"><img src="minus.png" alt="Minus"></button>
+                            <button class="input-button" id="inputTextImageBtn"><img src="screenshot.png" alt="Screenshot"></button>
+                            <button class="input-button" id="inputExecuteAI"><img src="idea.png" alt="Idea"></button>
+                            <button class="input-btn" id="inputFontBtn"><img src="text.png" alt="Font Text"></button>
+                            <button class="input-btn" id="inputBackgroundBtn"><img src="background.png" alt="Background"></button>
+                            <button class="input-button" id="inputPdfImageBtn"><img src="screenshot.png" alt="Image PDF"></button>
+                            <button class="input-btn" id="inputCancelBtn"><img src="canceled.png" alt="Canceled"></button>
+                        </div>
+                    </div>
+                    <textarea id="input-area"></textarea>
+                </div>
+                <div class="horizontal-bar"></div>
+                <div class="output-area">
+                    <div class="output-label">
+                        Output
+                        <div class="output-buttons">
+                            <button class="output-btn" id="outputCheckedBtn"><img src="checked.png" alt="Checked"></button>
+                            <button class="output-button" id="outputTextUploadBtn"><img src="upload.png" alt="Upload"></button>
+                            <button class="output-button" id="outputTextDownloadBtn"><img src="download.png" alt="Download"></button>
+                            <button class="output-btn" id="outputPlusBtn"><img src="plus.png" alt="Plus"></button>
+                            <button class="output-btn" id="outputColorBtn"><img src="color_wheel.png" alt="Color"></button>
+                            <button class="output-btn" id="outputMinusBtn"><img src="minus.png" alt="Minus"></button>
+                            <button class="output-button" id="outputTextImageBtn"><img src="screenshot.png" alt="Screenshot"></button>
+                            <button class="output-button" id="runAI"><img src="idea.png" alt="Idea"></button>
+                            <button class="output-btn" id="outputFontBtn"><img src="text.png" alt="Font Text"></button>
+                            <button class="output-btn" id="outputBackgroundBtn"><img src="background.png" alt="Background"></button>
+                            <button class="output-button" id="outputPdfImageBtn"><img src="screenshot.png" alt="Output PDF"></button>
+                            <button class="output-btn" id="outputCancelBtn"><img src="canceled.png" alt="Canceled"></button>
+                        </div>
+                    </div>
+                    <textarea id="output-area"></textarea>
+                </div>
+            </div>
+            <div class="new-horizontal-bar">
+                <div class="new-horizontal-bar-vertical"></div>
+            </div>
+        </div>
+        <div class="bottom-vertical-bar"></div>
+        <div class="right-vertical-bar"></div>
+    </div>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src ="storeGrokAPIKey.js"></script>
+    <script src ="editorCodeUserPrompt.js"></script>
+    <script src ="editorImagePDF.js"></script>
+    <script src ="editorTextImage.js"></script>
+    <script src ="editorCancelChecked.js"></script>
+    <script src ="editorTextColor.js"></script>
+    <script src ="editorTextUpload.js"></script>
+    <script src ="editorTextDownload.js"></script>
+    <script src ="editorBackground.js"></script>
+    <script src ="editorFontText.js"></script>
+    <script src ="editorPlusMinus.js"></script>
+    <script src ="inputImagePDF.js"></script>
+    <script src ="outputImagePDF.js"></script>
+    <script src ="userChoiceText.js"></script>
+    <script src ="userChoiceScreenshot.js"></script>
+    <script src ="toggleInputOutput.js"></script>
+    <script src ="toggleMainEditor.js"></script>
+    <script src ="toggleEditorMain.js"></script>
+    <script src ="toggleLayout.js"></script> 
+    <script src ="inputBackground.js"></script>
+    <script src ="outputBackground.js"></script>
+    <script src ="inputFontText.js"></script>
+    <script src ="outputFontText.js"></script>
+    <script src ="inputTextColor.js"></script>
+    <script src ="outputTextColor.js"></script>
+    <script src ="inputPlusMinus.js"></script>
+    <script src ="outputPlusMinus.js"></script>
+    <script src ="changeOrientation.js"></script>
+    <script src ="leftPointer.js"></script>
+    <script src ="imagePointer.js"></script>
+    <script type="module" src ="rightPointer.js"></script>
+    <script type="module" src="models.js"></script>
+    <script src="shareContent.js"></script>
+    <script src="multipleFiles.js"></script>
+    <script src="promptImage.js"></script>
+    <script src="promptImageDisplay.js"></script>
+    <script src="userPrompt.js"></script>
+    <script src="uploadPrompt.js"></script>
+    <script src="downloadPrompt.js"></script>
+    <script src ="inputTextUpload.js"></script>
+    <script src ="inputTextDownload.js"></script>
+    <script src ="inputTextImage.js"></script>
+    <script src ="inputExecute.js"></script>
+    <script src ="outputTextUpload.js"></script>
+    <script src ="outputTextDownload.js"></script>
+    <script src ="outputTextImage.js"></script>
+    <script src ="outputExecute.js"></script>
+    <!-- <script type="module" src ="codeContentAI.js"></script> -->
+    <script src ="debug.js"></script>
+    <script src="inputCancelChecked.js"></script>
+    <script src="outputCancelChecked.js"></script>
+    <script src="themeChange.js"></script>
+    <script src="modeLightDark.js"></script>
+    <script src ="resultAI.js"></script>
+    <script src ="pdf.js"></script>
+    <script src ="judge0.js"></script>
+    <script src ="stopExecution.js"></script>
+    <script src ="screenshot.js"></script>
+    <script src ="customImage.js"></script>
+    <script src ="colorimage.js"></script>
+    <script src="language.js"></script>
+    <script src ="downloadFile.js"></script>
+    <script src ="uploadFile.js"></script>
+    <script src="script.js"></script>
+</body>
+
+
+</html>

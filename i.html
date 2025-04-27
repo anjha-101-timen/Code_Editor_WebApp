@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Code Editor</title>
+    <link rel="stylesheet" href="screenshot.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="additional-bar.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="top-buttons">
+                <button class="top-buttons" id="fileButton"><img src="file_upload.png" alt="Upload">Upload</button>
+                <button class="top-buttons" id="downloadBtn"><img src="file_download.png" alt="Download">Download</button>
+                <button class="top-buttons" id="languageBtn"><img src="language.png" alt="Language">Language</button>
+                <button class="top-buttons" id="runBtn"><img src="run.png" alt="Run">Run</button>
+                <button class="top-buttons" id="stopBtn"><img src="stop.png" alt="Stop">Stop</button>
+                <button class="top-buttons" id="pdfBtn"><img src="pdf.png" alt="PDF">P.D.F</button>
+                <button class="top-buttons" id="codeContent"><img src="generate.png" alt="Generate">Generate</button>
+                <button class="top-buttons" id="result"><img src="result.png" alt="Result">Result</button>
+                <button class="top-buttons"><img src="share.png" alt="Share">Share</button>
+                <button class="top-buttons"><img src="help.png" alt="Help">Help</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="side-bar">
+                <div class="side-buttons">
+                    <button class="side-button" id="screenshotBtn"></button>
+                    <button class="side-button" id="themeChangeBtn"></button>
+                    <button class="side-button" id="modeLightDarkBtn"></button>
+                    <button class="side-button" id="changeOrientationBtn"></button>
+                    <button class="side-button"></button>
+                    <button class="side-button"></button>
+                    <button class="side-button"></button>
+                    <button class="side-button"></button>
+                    <button class="side-button"></button>
+                    <button class="side-button" id="colorImage"></button>
+                </div>
+            </div>
+            <div class="tab-container">
+            <div class="tab-header">
+                <button class="add-tab-btn">+</button>
+            </div>
+            <div class="editor-container">
+                <div id="editor-tabs"></div>
+                <div class="editor-area">
+                    <div class="editor-label">Main Code Editor</div>
+                    <div id="editor" style="height: calc(100% - 120px);"></div> <div class="additional-bar">
+                        <button class="additional-button" id="promptImageBtn"><img src="image.png" alt="Prompt Image"></button>
+                        <button class="additional-button" id="promptImageDisplayBtn"><img src="image.png" alt="Prompt Display Image"></button>
+                        <input type="text" class="additional-input" placeholder="Enter text here...">
+                        <button class="additional-button" id="leftPointerBtn"><img src="left_arrow.png" alt="Left Arrow"></button>
+                        <button class="additional-button" id="uploadPromptBtn"><img src="upload.png" alt="Upload"></button>
+                        <button class="additional-button" id="downloadPromptBtn"><img src="download.png" alt="Download"></button>
+                        <button class="additional-button" id="modelBtn"><img src="models.png" alt="Model"></button>
+                        <button class="additional-button"><img src="screenshot.png" alt="Screenshot"></button>
+                        <button class="additional-button" id="rightPointerBtn"><img src="right_arrow.png" alt="Right Arrow"></button>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="vertical-bar"></div>
+            <div class="input-output-container">
+                <div class="input-area">
+                    <div class="input-label">
+                        Input
+                        <div class="input-buttons">
+                            <button class="intput-btn" id="inputCheckedBtn"><img src="checked.png" alt="screenshot"></button>
+                            <button class="input-button" id="inputTextUploadBtn"><img src="upload.png" alt="Upload"></button>
+                            <button class="input-button" id="inputTextDownloadBtn"><img src="download.png" alt="Download"></button>
+                            <button class="input-button" id="inputTextImageBtn"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="input-button" id="inputExecuteAI"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="input-button"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="intput-btn" id="inputCancelBtn"><img src="cancel.png" alt="screenshot"></button>
+                        </div>
+                    </div>
+                    <textarea id="input-area"></textarea>
+                </div>
+                <div class="horizontal-bar"></div>
+                <div class="output-area">
+                    <div class="output-label">
+                        Output
+                        <div class="output-buttons">
+                            <button class="output-btn" id="outputCheckedBtn"><img src="checked.png" alt="screenshot"></button>
+                            <button class="output-button" id="outputTextUploadBtn"><img src="upload.png" alt="Upload"></button>
+                            <button class="output-button" id="outputTextDownloadBtn"><img src="download.png" alt="Download"></button>
+                            <button class="output-button" id="outputTextImageBtn"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="output-button" id="runAI"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="output-button"><img src="screenshot.png" alt="screenshot"></button>
+                            <button class="output-btn" id="outputCancelBtn"><img src="cancel.png" alt="screenshot"></button>
+                        </div>
+                    </div>
+                    <textarea id="output-area"></textarea>
+                </div>
+            </div>
+            <div class="new-horizontal-bar">
+                <div class="new-horizontal-bar-vertical"></div>
+            </div>
+        </div>
+        <div class="bottom-vertical-bar"></div>
+        <div class="right-vertical-bar"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src ="leftPointer.js"></script>
+    <script type="module" src ="rightPointer.js"></script>
+    <script type="module" src="models.js"></script>
+    <script src="multipleFiles.js"></script>
+    <script src="promptImage.js"></script>
+    <script src="promptImageDisplay.js"></script>
+    <script src="uploadPrompt.js"></script>
+    <script src="downloadPrompt.js"></script>
+    <script src ="inputTextUpload.js"></script>
+    <script src ="inputTextDownload.js"></script>
+    <script src ="inputTextImage.js"></script>
+    <script src ="inputExecute.js"></script>
+    <script src ="outputTextUpload.js"></script>
+    <script src ="outputTextDownload.js"></script>
+    <script src ="outputTextImage.js"></script>
+    <script src ="outputExecute.js"></script>
+    <script src ="codeContentAI.js"></script>
+    <script src="inputCancelChecked.js"></script>
+    <script src="outputCancelChecked.js"></script>
+    <script src="themeChange.js"></script>
+    <script src="modeLightDark.js"></script>
+    <script src ="resultAI.js"></script>
+    <script src ="pdf.js"></script>
+    <script src ="judge0.js"></script>
+    <script src ="stopExecution.js"></script>
+    <script src ="screenshot.js"></script>
+    <script src ="customImage.js"></script>
+    <script src ="colorimage.js"></script>
+    <script src="language.js"></script>
+    <script src="file.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
