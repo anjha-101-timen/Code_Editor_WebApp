@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Groq API Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>Groq API Example</h1>
+  <input id="api-key" type="text" placeholder="Enter your Groq API key">
+  <input id="query" type="text" placeholder="Enter your Groq query">
+  <input id="dataset" type="text" placeholder="Enter your Groq dataset">
+  <button id="query-button">Query Groq API</button>
+  <div id="results"></div>
+  <script>
+    const apiKeyInput = document.getElementById('api-key');
+    const queryInput = document.getElementById('query');
+    const datasetInput = document.getElementById('dataset');
+    const queryButton = document.getElementById('query-button');
+    const resultsElement = document.getElementById('results');
+
+    queryButton.addEventListener('click', async () => {
+      const apiKey = apiKeyInput.value;
+      const query = queryInput.value;
+      const dataset = datasetInput.value;
+      const response = await axios.post('https://api.groq.com/query', {
+        query,
+        dataset,
+        api_key: apiKey,
+      });
+
+      resultsElement.innerText = JSON.stringify(response.data, null, 2);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeInModal 0.5s ease-in-out;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.01%);
+    animation: moveBackground 10s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Modal Content */
+.modal-content {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    padding: 30px;
+    border-radius: 16px;
+    width: 500px;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: scaleUp 0.5s ease-in-out;
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Close Button */
+.modal-content .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+.modal-content .close-btn:hover {
+    color: #ff4d4d;
+    transform: rotate(90deg);
+}
+
+/* Heading */
+.modal-content h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: #E95420;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.modal-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #E95420;
+    border-radius: 2px;
+}
+
+/* Input Field */
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f8fafc;
+    color: #2d3748;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.modal-content input[type="text"]:focus {
+    border-color: #4c6ef5;
+    box-shadow: 0 0 8px rgba(76, 110, 245, 0.3);
+}
+
+/* Labels */
+.modal-content label {
+    font-size: 14px;
+    color: #4a5568;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Copy Link Buttons */
+.modal-content button {
+    background: linear-gradient(135deg, #E95420, #FF8C4B);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    width: 48%; /* Adjust for side-by-side buttons */
+    display: inline-block; /* Allow side-by-side layout */
+    margin-right: 2%; /* Add spacing between buttons */
+}
+
+/* Adjust margin for the last button to avoid extra spacing */
+.modal-content button:last-child {
+    margin-right: 0;
+}
+
+.modal-content button:hover {
+    background: linear-gradient(135deg, #FF8C4B, #E95420);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Section for Light and Dark Mode Links */
+.modal-content .link-section {
+    margin-top: 25px;
+}
+
+.modal-content .link-section label {
+    margin-bottom: 10px;
+}
+
+.modal-content .link-section input[type="text"] {
+    margin-bottom: 15px;
+}
+
+/* Ensure content sections adapt to dark mode */
+.modal-content .content-section {
+    background-color: var(--box-bg);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInContent 1s ease-in-out forwards;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content pre {
+    background-color: #f8fafc;
+    padding: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+/* Link Container */
+.modal-content .link-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px; /* Add gap between elements */
+}
+
+.modal-content .link-container input[type="text"] {
+    flex: 1 1 70%; /* Input takes up most space */
+    min-width: 200px; /* Ensure input doesn't get too small */
+}
+
+.modal-content .link-container button {
+    flex: 1 1 25%; /* Buttons take up remaining space */
+    margin: 0; /* Remove default button margins */
+}
+
+/* Adjust button width on smaller screens */
+@media (max-width: 600px) {
+    .modal-content .link-container button {
+        flex: 1 1 100%; /* Full width buttons on small screens */
+    }
+}

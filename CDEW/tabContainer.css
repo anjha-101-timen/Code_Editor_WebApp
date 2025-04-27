@@ -1,0 +1,78 @@
+/* Tab Container */
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px); /* Adjust for top-bar */
+}
+
+.tab-header {
+    display: flex;
+    align-items: center;
+    background: #2a2a2a;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tab-header button {
+    background: #3a3a3a;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.tab-header button:hover {
+    background: #4a4a4a;
+}
+
+.add-tab-btn {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-tab-btn:hover {
+    background: #43a047;
+}
+
+.editor-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+#editor-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Individual Tab Content */
+.tab-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+
+
+
+
+

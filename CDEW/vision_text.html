@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groq Vision Model Example</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #imagePreview {
+            max-width: 300px;
+            max-height: 300px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        #result {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="imageInput" accept="image/*">
+    <img id="imagePreview" src="#" alt="Image Preview" style="display: none;">
+    <textarea id="promptInput" placeholder="Enter your prompt"></textarea>
+    <button id="generateButton">Generate Response</button>
+    <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('imageInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const promptInput = document.getElementById('promptInput');
+            const generateButton = document.getElementById('generateButton');
+            const resultDiv = document.getElementById('result');
+
+            const GROQ_API_KEY = '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'; // Replace with your actual API key
+            const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+            let base64Image = null;
+
+            imageInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        base64Image = e.target.result;
+                        imagePreview.src = base64Image;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            generateButton.addEventListener('click', async function() {
+                const prompt = promptInput.value;
+
+                if (!base64Image) {
+                    alert("Please select an image.");
+                    return;
+                }
+
+                if (!prompt) {
+                    alert("Please enter a prompt.");
+                    return;
+                }
+
+                resultDiv.textContent = "Generating response...";
+
+                try {
+                    const response = await fetch(GROQ_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${GROQ_API_KEY}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: "llama-3.2-90b-vision-preview",
+                            messages: [
+                                {
+                                    role: "user",
+                                    content: [
+                                        { type: "text", text: prompt },
+                                        { type: "image_url", image_url: { url: base64Image, detail: "high" } }
+                                    ]
+                                }
+                            ]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    const result = data.choices?.[0]?.message?.content || "Error: No valid response from API.";
+
+                    resultDiv.textContent = result;
+
+                } catch (error) {
+                    console.error('Groq Vision Error:', error);
+                    resultDiv.textContent = "Error: Failed to generate response.";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

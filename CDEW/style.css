@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #000000;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.editor-container {
+    flex: 2 1 60%;
+    padding: 0.6vw;
+    box-sizing: border-box;
+    background-color: #202020;
+}
+
+.editor-area {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#editor {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .editor-container, .input-output-container {
+        flex: 1;
+    }
+
+    .input-output-container {
+        flex-direction: row;
+    }
+
+    .vertical-bar {
+        display: none;
+    }
+}
+
+@keyframes rainbow {
+    0% { background-color: red; }
+    14% { background-color: orange; }
+    28% { background-color: yellow; }
+    42% { background-color: green; }
+    57% { background-color: blue; }
+    71% { background-color: indigo; }
+    85% { background-color: violet; }
+    100% { background-color: red; }
+}
+
+/* Class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Class for vertical layout */
+.vertical-layout {
+    flex-direction: column;
+}
+
+/* Class for horizontal layout */
+.horizontal-layout {
+    flex-direction: row;
+}
+
+/* Class to reset flex properties */
+.flex-reset {
+    flex: 1 1 auto;
+}
+
+/* Class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Class for full-width editor */
+.editor-full {
+    flex-grow: 2;
+}
+
+/* Class for half-width editor */
+.editor-half {
+    flex-grow: 1;
+}
+
+/* Class for vertical layout */
+.vertical-layout {
+    flex-direction: column;
+}
+
+/* Class for horizontal layout */
+.horizontal-layout {
+    flex-direction: row;
+}
+
+/* Class to reset flex properties */
+.flex-reset {
+    flex: 1 1 auto;
+}

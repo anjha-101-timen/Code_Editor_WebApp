@@ -1,0 +1,52 @@
+/* style.css or loading.css */
+
+.editor-container {
+    position: relative;
+}
+
+.editor-loading #editor {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.editor-loading::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(to right, 
+        #ff0000, /* Red */
+        #ff7f00, /* Orange */
+        #ffff00, /* Yellow */
+        #00ff00, /* Green */
+        #0000ff, /* Blue */
+        #4b0082, /* Indigo */
+        #8b00ff  /* Violet */
+    );
+    animation: rainbowSpin 2s linear infinite;
+    z-index: 10;
+}
+
+.editor-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background-color: #f0f0f0; /* Light grey or your editor background */
+    border-radius: 50%;
+    z-index: 11; /* Place it on top of the gradient circle */
+}
+
+@keyframes rainbowSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
