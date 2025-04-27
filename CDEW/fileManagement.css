@@ -1,0 +1,91 @@
+/* Base styles for all top buttons */
+.top-buttons {
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    color: white; /* Text color remains white for contrast */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-image 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
+    font-size: 16px; /* Adjusted font size */
+    font-weight: 1000; /* Semi-bold for a refined look */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff; /* Light, readable text color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+    background-color: #000000; /* Universal black background */
+}
+
+/* Hover effect for all top buttons */
+.top-buttons:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Icon styling inside buttons */
+.top-buttons img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(255, 255, 255, 0.5)); /* Adjusted for better visibility on black */
+}
+
+/* Gradient shimmer effect */
+.top-buttons::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+/* Shimmer effect on hover */
+.top-buttons:hover::before {
+    transform: translateX(0);
+}
+
+#fileButton { background-color: #0000ff; } /* Blue */
+        #fileUploadBtn { background-color: #0000ff } /* Green */
+        #fileDownloadBtn { background-color: #0000ff } /* Green */
+        #languageBtn { background-color: #8F00FF; } /* Purple */
+        #runBtn { background-color: #ff0000; } /* Orange */
+        #stopBtn { background-color: #ff0000; } /* Red */
+        #pdfBtn { background-color:  #006A4E; } /* Dark Blue */
+        #debugBtn { background-color:  #9500ff; } /* Dark Blue */
+        #codeContent { background-color: #228B22; } /* Yellow */
+        #resultBtn { background-color: #00ff00; } /* Teal */
+        .top-buttons button:nth-child(9) { background-color: #800000; } /* Light Gray */
+        .top-buttons button:nth-child(10) { background-color:   #FF8000; } /* Darker Gray */
+   
+
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+        }
+        
+        .side-bar {
+            /* ... your existing side-bar styles ... */
+            flex-shrink: 0; /* Prevent side-bar from shrinking */
+        }
+        
+        .editor-container, .input-output-container {
+            flex-grow: 1; /* Allow these to grow */
+        }
+
+
+
+/* additional-bar.css */

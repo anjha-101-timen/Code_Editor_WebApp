@@ -1,0 +1,61 @@
+#modelSelect {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-family: sans-serif;
+    outline: none;
+    z-index: 1000;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#modelSelect option {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+#modelSelect option:last-child {
+    border-bottom: none;
+}
+
+#modelSelect option:hover,
+#modelSelect option:focus,
+#modelSelect option:checked {
+    background-color: #f0f0f0;
+}
+
+#modelSelect:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#modelSelect:disabled {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #495057;
+    cursor: not-allowed;
+}
+
+#modelSelect::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modelSelect::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#modelSelect::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#modelSelect::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
